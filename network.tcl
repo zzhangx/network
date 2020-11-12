@@ -4,7 +4,7 @@
 #===================================
 #     Simulation parameters setup
 #===================================
-set val(stop)   8.0                         ;# time of simulation end
+set val(stop)   5.0                         ;# time of simulation end
 
 #===================================
 #        Initialization        
@@ -94,8 +94,8 @@ $ns duplex-link-op $n8 $n9 orient right-down
 $ns duplex-link-op $n10 $n9 orient left-up
 $ns duplex-link-op $n12 $n10 orient right-up
 $ns duplex-link-op $n6 $n14 orient right-down
-$ns duplex-link-op $n1 $n2 orient left-down
-$ns duplex-link-op $n2 $n3 orient right-down
+$ns duplex-link-op $n1 $n2 orient right-down
+$ns duplex-link-op $n2 $n3 orient left-down
 $ns duplex-link-op $n4 $n3 orient left-down
 $ns duplex-link-op $n4 $n5 orient right-up
 $ns duplex-link-op $n5 $n7 orient right
@@ -116,18 +116,18 @@ $ns duplex-link-op $n2 $n4 orient right
 #Setup a UDP connection
 set udp0 [new Agent/UDP]
 $ns attach-agent $n0 $udp0
-set null2 [new Agent/Null]
-$ns attach-agent $n10 $null2
-$ns connect $udp0 $null2
-$udp0 set packetSize_ 3000
+set null5 [new Agent/Null]
+$ns attach-agent $n6 $null5
+$ns connect $udp0 $null5
+$udp0 set packetSize_ 6000
 
 #Setup a UDP connection
 set udp1 [new Agent/UDP]
 $ns attach-agent $n12 $udp1
-set null3 [new Agent/Null]
-$ns attach-agent $n2 $null3
-$ns connect $udp1 $null3
-$udp1 set packetSize_ 3000
+set null4 [new Agent/Null]
+$ns attach-agent $n1 $null4
+$ns connect $udp1 $null4
+$udp1 set packetSize_ 5000
 
 
 #===================================
@@ -137,8 +137,8 @@ $udp1 set packetSize_ 3000
 set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
 $cbr0 set packetSize_ 3000
-$cbr0 set rate_ 3.0Mb
-$cbr0 set random_ null
+$cbr0 set rate_ 5.0Mb
+$cbr0 set random_ 
 $ns at 1.0 "$cbr0 start"
 $ns at 6.0 "$cbr0 stop"
 
