@@ -116,9 +116,9 @@ $ns duplex-link-op $n2 $n4 orient right
 #Setup a UDP connection
 set udp0 [new Agent/UDP]
 $ns attach-agent $n0 $udp0
-set null5 [new Agent/Null]
-$ns attach-agent $n6 $null5
-$ns connect $udp0 $null5
+set null6 [new Agent/Null]
+$ns attach-agent $n5 $null6
+$ns connect $udp0 $null6
 $udp0 set packetSize_ 6000
 
 #Setup a UDP connection
@@ -128,6 +128,14 @@ set null4 [new Agent/Null]
 $ns attach-agent $n1 $null4
 $ns connect $udp1 $null4
 $udp1 set packetSize_ 5000
+
+#Setup a UDP connection
+set udp7 [new Agent/UDP]
+$ns attach-agent $n11 $udp7
+set null8 [new Agent/Null]
+$ns attach-agent $n6 $null8
+$ns connect $udp7 $null8
+$udp7 set packetSize_ 4000
 
 
 #===================================
@@ -150,6 +158,15 @@ $cbr1 set rate_ 5.0Mb
 $cbr1 set random_ 
 $ns at 1.0 "$cbr1 start"
 $ns at 6.0 "$cbr1 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr2 [new Application/Traffic/CBR]
+$cbr2 attach-agent $udp7
+$cbr2 set packetSize_ 5000
+$cbr2 set rate_ 5.0Mb
+$cbr2 set random_ null
+$ns at 0.0 "$cbr2 start"
+$ns at 5.0 "$cbr2 stop"
 
 
 #===================================
