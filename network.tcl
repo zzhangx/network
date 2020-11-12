@@ -4,7 +4,7 @@
 #===================================
 #     Simulation parameters setup
 #===================================
-set val(stop)   5.0                         ;# time of simulation end
+set val(stop)   2.0                         ;# time of simulation end
 
 #===================================
 #        Initialization        
@@ -137,6 +137,22 @@ $ns attach-agent $n6 $null8
 $ns connect $udp7 $null8
 $udp7 set packetSize_ 4000
 
+#Setup a UDP connection
+set udp9 [new Agent/UDP]
+$ns attach-agent $n8 $udp9
+set null10 [new Agent/Null]
+$ns attach-agent $n14 $null10
+$ns connect $udp9 $null10
+$udp9 set packetSize_ 3000
+
+#Setup a UDP connection
+set udp11 [new Agent/UDP]
+$ns attach-agent $n3 $udp11
+set null12 [new Agent/Null]
+$ns attach-agent $n10 $null12
+$ns connect $udp11 $null12
+$udp11 set packetSize_ 3000
+
 
 #===================================
 #        Applications Definition        
@@ -147,8 +163,8 @@ $cbr0 attach-agent $udp0
 $cbr0 set packetSize_ 3000
 $cbr0 set rate_ 5.0Mb
 $cbr0 set random_ 
-$ns at 1.0 "$cbr0 start"
-$ns at 6.0 "$cbr0 stop"
+$ns at 0.0 "$cbr0 start"
+$ns at 2.0 "$cbr0 stop"
 
 #Setup a CBR Application over UDP connection
 set cbr1 [new Application/Traffic/CBR]
@@ -156,17 +172,35 @@ $cbr1 attach-agent $udp1
 $cbr1 set packetSize_ 3000
 $cbr1 set rate_ 5.0Mb
 $cbr1 set random_ 
-$ns at 1.0 "$cbr1 start"
-$ns at 6.0 "$cbr1 stop"
+$ns at 0.0 "$cbr1 start"
+$ns at 2.0 "$cbr1 stop"
 
 #Setup a CBR Application over UDP connection
 set cbr2 [new Application/Traffic/CBR]
 $cbr2 attach-agent $udp7
 $cbr2 set packetSize_ 5000
 $cbr2 set rate_ 5.0Mb
-$cbr2 set random_ null
+$cbr2 set random_ 
 $ns at 0.0 "$cbr2 start"
-$ns at 5.0 "$cbr2 stop"
+$ns at 2.0 "$cbr2 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr3 [new Application/Traffic/CBR]
+$cbr3 attach-agent $udp9
+$cbr3 set packetSize_ 5000
+$cbr3 set rate_ 5.0Mb
+$cbr3 set random_ null
+$ns at 0.0 "$cbr3 start"
+$ns at 2.0 "$cbr3 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr4 [new Application/Traffic/CBR]
+$cbr4 attach-agent $udp11
+$cbr4 set packetSize_ 5000
+$cbr4 set rate_ 5.0Mb
+$cbr4 set random_ null
+$ns at 0.0 "$cbr4 start"
+$ns at 2.0 "$cbr4 stop"
 
 
 #===================================
