@@ -118,44 +118,12 @@ $ns duplex-link-op $n11 $n13 orient left-down
 #        Agents Definition        
 #===================================
 #Setup a UDP connection
-set udp0 [new Agent/UDP]
-$ns attach-agent $n1 $udp0
-set null4 [new Agent/Null]
-$ns attach-agent $n2 $null4
-$ns connect $udp0 $null4
-$udp0 set packetSize_ 2000
-
-#Setup a UDP connection
-set udp1 [new Agent/UDP]
-$ns attach-agent $n1 $udp1
-set null6 [new Agent/Null]
-$ns attach-agent $n12 $null6
-$ns connect $udp1 $null6
-$udp1 set packetSize_ 2000
-
-#Setup a UDP connection
-set udp2 [new Agent/UDP]
-$ns attach-agent $n1 $udp2
-set null3 [new Agent/Null]
-$ns attach-agent $n0 $null3
-$ns connect $udp2 $null3
-$udp2 set packetSize_ 2000
-
-#Setup a UDP connection
 set udp7 [new Agent/UDP]
 $ns attach-agent $n1 $udp7
 set null5 [new Agent/Null]
 $ns attach-agent $n3 $null5
 $ns connect $udp7 $null5
 $udp7 set packetSize_ 2000
-
-#Setup a UDP connection
-set udp8 [new Agent/UDP]
-$ns attach-agent $n1 $udp8
-set null11 [new Agent/Null]
-$ns attach-agent $n5 $null11
-$ns connect $udp8 $null11
-$udp8 set packetSize_ 2000
 
 #Setup a UDP connection
 set udp9 [new Agent/UDP]
@@ -205,6 +173,38 @@ $ns attach-agent $n9 $null21
 $ns connect $udp17 $null21
 $udp17 set packetSize_ 2000
 
+#Setup a UDP connection
+set udp22 [new Agent/UDP]
+$ns attach-agent $n2 $udp22
+set null25 [new Agent/Null]
+$ns attach-agent $n4 $null25
+$ns connect $udp22 $null25
+$udp22 set packetSize_ 2000
+
+#Setup a UDP connection
+set udp23 [new Agent/UDP]
+$ns attach-agent $n12 $udp23
+set null27 [new Agent/Null]
+$ns attach-agent $n7 $null27
+$ns connect $udp23 $null27
+$udp23 set packetSize_ 2000
+
+#Setup a UDP connection
+set udp24 [new Agent/UDP]
+$ns attach-agent $n0 $udp24
+set null26 [new Agent/Null]
+$ns attach-agent $n9 $null26
+$ns connect $udp24 $null26
+$udp24 set packetSize_ 2000
+
+#Setup a UDP connection
+set udp28 [new Agent/UDP]
+$ns attach-agent $n3 $udp28
+set null11 [new Agent/Null]
+$ns attach-agent $n5 $null11
+$ns connect $udp28 $null11
+$udp28 set packetSize_ 2000
+
 
 #===================================
 #        Applications Definition        
@@ -219,15 +219,6 @@ $ns at 1.0 "$cbr11 start"
 $ns at 3.0 "$cbr11 stop"
 
 #Setup a CBR Application over UDP connection
-set cbr12 [new Application/Traffic/CBR]
-$cbr12 attach-agent $udp8
-$cbr12 set packetSize_ 1500
-$cbr12 set rate_ 5.0Mb
-$cbr12 set random_ null
-$ns at 1.0 "$cbr12 start"
-$ns at 3.0 "$cbr12 stop"
-
-#Setup a CBR Application over UDP connection
 set cbr13 [new Application/Traffic/CBR]
 $cbr13 attach-agent $udp9
 $cbr13 set packetSize_ 1500
@@ -237,15 +228,6 @@ $ns at 1.0 "$cbr13 start"
 $ns at 3.0 "$cbr13 stop"
 
 #Setup a CBR Application over UDP connection
-set cbr14 [new Application/Traffic/CBR]
-$cbr14 attach-agent $udp1
-$cbr14 set packetSize_ 1500
-$cbr14 set rate_ 5.0Mb
-$cbr14 set random_ null
-$ns at 1.0 "$cbr14 start"
-$ns at 3.0 "$cbr14 stop"
-
-#Setup a CBR Application over UDP connection
 set cbr15 [new Application/Traffic/CBR]
 $cbr15 attach-agent $udp10
 $cbr15 set packetSize_ 1500
@@ -253,24 +235,6 @@ $cbr15 set rate_ 5.0Mb
 $cbr15 set random_ null
 $ns at 1.0 "$cbr15 start"
 $ns at 3.0 "$cbr15 stop"
-
-#Setup a CBR Application over UDP connection
-set cbr16 [new Application/Traffic/CBR]
-$cbr16 attach-agent $udp2
-$cbr16 set packetSize_ 1500
-$cbr16 set rate_ 5.0Mb
-$cbr16 set random_ null
-$ns at 1.0 "$cbr16 start"
-$ns at 3.0 "$cbr16 stop"
-
-#Setup a CBR Application over UDP connection
-set cbr17 [new Application/Traffic/CBR]
-$cbr17 attach-agent $udp0
-$cbr17 set packetSize_ 1500
-$cbr17 set rate_ 5.0Mb
-$cbr17 set random_ null
-$ns at 1.0 "$cbr17 start"
-$ns at 3.0 "$cbr17 stop"
 
 #Setup a CBR Application over UDP connection
 set cbr18 [new Application/Traffic/CBR]
@@ -307,6 +271,42 @@ $cbr21 set rate_ 5.0Mb
 $cbr21 set random_ null
 $ns at 1.0 "$cbr21 start"
 $ns at 3.0 "$cbr21 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr22 [new Application/Traffic/CBR]
+$cbr22 attach-agent $udp24
+$cbr22 set packetSize_ 2000
+$cbr22 set rate_ 5.0Mb
+$cbr22 set random_ null
+$ns at 1.0 "$cbr22 start"
+$ns at 3.0 "$cbr22 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr23 [new Application/Traffic/CBR]
+$cbr23 attach-agent $udp23
+$cbr23 set packetSize_ 2000
+$cbr23 set rate_ 5.0Mb
+$cbr23 set random_ null
+$ns at 1.0 "$cbr23 start"
+$ns at 3.0 "$cbr23 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr24 [new Application/Traffic/CBR]
+$cbr24 attach-agent $udp22
+$cbr24 set packetSize_ 2000
+$cbr24 set rate_ 5.0Mb
+$cbr24 set random_ null
+$ns at 1.0 "$cbr24 start"
+$ns at 3.0 "$cbr24 stop"
+
+#Setup a CBR Application over UDP connection
+set cbr26 [new Application/Traffic/CBR]
+$cbr26 attach-agent $udp28
+$cbr26 set packetSize_ 2000
+$cbr26 set rate_ 5.0Mb
+$cbr26 set random_ null
+$ns at 1.0 "$cbr26 start"
+$ns at 2.0 "$cbr26 stop"
 
 
 #===================================
